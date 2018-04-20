@@ -12,7 +12,7 @@ module.exports = {
         filename: 'bundle.js'
     },
     devServer: {
-        port: 7777,
+        port: 32312,
         contentBase: path.join(__dirname, "dist"),
         compress: true
     },
@@ -28,6 +28,26 @@ module.exports = {
                         minimize: true
                     }
                 }
+            },
+            {
+                test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }
+            },
+            {
+                test: /\.less$/,
+                use: [{
+                    loader: "style-loader" // creates style nodes from JS strings
+                }, {
+                    loader: "css-loader" // translates CSS into CommonJS
+                }, {
+                    loader: "less-loader" // compiles Less to CSS
+                }]
             }
         ]
     }
